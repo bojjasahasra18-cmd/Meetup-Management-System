@@ -21,10 +21,15 @@ const Navbar = () => {
           <Link to="/" className="nav-link">Dashboard</Link>
           
           {isAuthenticated ? (
-            <>
-              {(user?.role === 'organizer' || user?.role === 'admin') && (
-                <Link to="/create-meetup" className="nav-link">Create Meetup</Link>
-              )}
+  <>
+    <Link to="/profile" className="nav-link">Profile</Link>
+    <Link to="/history" className="nav-link">
+  History
+</Link>
+
+    {(user?.role === 'organizer' || user?.role === 'admin') && (
+      <Link to="/create-meetup" className="nav-link">Create Meetup</Link>
+    )}
               <div className="nav-user-info">
                 <span className="nav-user-name" title={`${user?.profession || ''} @ ${user?.company || ''}`}>
                   {user?.name}

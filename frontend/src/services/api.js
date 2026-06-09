@@ -85,4 +85,16 @@ export const getMeetupHistory = async () => {
   return response.data;
 };
 
+export const getHistory = async () => {
+  const response = await API.get('/history');
+  return response.data;
+};
+
+export const exportMeetupCSV = async (id) => {
+  const response = await API.get(`/meetups/${id}/export`, {
+    responseType: "blob",
+  });
+  return response.data;
+};
+
 export default API;

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
+import { exportMeetupCSV } from "../services/api";
 import { useAuth } from '../context/AuthContext';
 import {
   getMeetupById,
@@ -134,6 +135,27 @@ const MeetupDetails = () => {
   });
 
   const isDeadlinePassed = new Date() > new Date(meetup.registrationDeadline);
+
+  const handleExportCSV = async () => {
+  try {
+    const blob = await exportMeetupCSV(id);
+
+    const url = window.URL.createObjectURL(blob);
+
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = `meetup-${id}.csv`;
+
+    document.body.appendChild(link);
+    link.click();
+
+    link.remove();
+    window.URL.revokeObjectURL(url);
+  } catch (error) {
+    console.error(error);
+    alert("CSV export failed");
+  }
+};
 
   return (
     <div className="details-container">
@@ -280,7 +302,15 @@ const MeetupDetails = () => {
                   >
                     View Analytics
                   </Link>
-                </>
+
+<button
+  onClick={handleExportCSV}
+  className="btn btn-outline btn-block btn-lg mt-3"
+>
+  Download CSV
+</button>
+
+</>
               ) : (
                 <div className="login-prompt">
                   <p>Please log in to register or check in.</p>

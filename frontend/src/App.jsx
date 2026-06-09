@@ -4,12 +4,14 @@ import { AuthProvider } from './context/AuthContext';
 import Navbar from './components/Navbar';
 
 // Pages
+import Profile from "./pages/Profile";
 import Dashboard from './pages/Dashboard';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import MeetupDetails from './pages/MeetupDetails';
 import CreateMeetup from './pages/CreateMeetup';
 import Analytics from './pages/Analytics';
+import History from './pages/History';
 
 import './App.css';
 
@@ -37,6 +39,10 @@ function App() {
 
               {/* Analytics page for individual meetups */}
               <Route path="/meetups/:id/analytics" element={<Analytics />} />
+              {/* User Profile */}
+              <Route path="/profile" element={<Profile />} />
+              {/* History page */}
+              <Route path="/history" element={<History />} />
 
               {/* Fallback route */}
               <Route path="*" element={<Navigate to="/" replace />} />
