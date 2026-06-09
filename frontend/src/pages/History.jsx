@@ -29,13 +29,32 @@ const History = () => {
       {meetups.length === 0 ? (
         <p>No completed meetups found.</p>
       ) : (
-        meetups.map((meetup) => (
-          <div key={meetup._id} className="meetup-card">
-            <h3>{meetup.title}</h3>
-            <p>{meetup.description}</p>
-            <p>{meetup.venue}</p>
-          </div>
-        ))
+     meetups.map((meetup) => (
+  <div
+    key={meetup._id}
+    className="meetup-card"
+    style={{ marginBottom: "20px", padding: "20px" }}
+  >
+    <h3>{meetup.title}</h3>
+
+    <p>
+      📍 <strong>Venue:</strong> {meetup.venue}
+    </p>
+
+    <p>
+      📝 <strong>Description:</strong> {meetup.description}
+    </p>
+
+    <p>
+      📅 <strong>Date:</strong>{" "}
+      {new Date(meetup.date).toLocaleDateString()}
+    </p>
+
+    <p>
+      👥 <strong>Capacity:</strong> {meetup.capacity}
+    </p>
+  </div>
+))
       )}
     </div>
   );

@@ -178,6 +178,17 @@ const MeetupDetails = () => {
             <h1 className="details-title">{meetup.title}</h1>
             <p className="details-description">{meetup.description}</p>
 
+            <div className="registered-members-section">
+  <h3 className="section-title">
+    Registered Members
+  </h3>
+
+  <p>
+    Total Registrations:
+    {meetup?.registrationCount || attendees.length}
+  </p>
+</div>
+
             <div className="live-attendees-section">
               <h3 className="section-title">Live Attendees ({attendees.length})</h3>
               {attendees.length === 0 ? (
@@ -197,6 +208,20 @@ const MeetupDetails = () => {
                         <h4>{attendee.name}</h4>
                         <p className="attendee-profession">{attendee.profession || 'Attendee'}</p>
                         <p className="attendee-company">{attendee.company || 'Freelancer'}</p>
+                        <button
+  className="btn btn-outline btn-sm mt-2"
+>
+  Connect
+</button>
+<button
+  className="btn btn-primary btn-sm mt-2"
+  onClick={() =>
+    window.location.href =
+      `mailto:${attendee.email || ''}`
+  }
+>
+  Message
+</button>
                       </div>
                     </div>
                   ))}

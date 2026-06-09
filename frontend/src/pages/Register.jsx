@@ -3,14 +3,15 @@ import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 
 const Register = () => {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    password: '',
-    profession: '',
-    company: '',
-    lookingFor: '',
-  });
+ const [formData, setFormData] = useState({
+  name: '',
+  email: '',
+  password: '',
+  profession: '',
+  company: '',
+  lookingFor: '',
+  role: 'user',
+});
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
 
@@ -98,6 +99,20 @@ const Register = () => {
                 required
               />
             </div>
+
+            <div className="form-group">
+  <label htmlFor="role">Role</label>
+
+  <select
+    id="role"
+    name="role"
+    value={formData.role}
+    onChange={handleChange}
+  >
+    <option value="user">User</option>
+    <option value="organizer">Organizer</option>
+  </select>
+</div>
 
             <div className="form-group">
               <label htmlFor="profession">Profession</label>
