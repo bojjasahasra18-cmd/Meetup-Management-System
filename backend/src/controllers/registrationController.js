@@ -5,6 +5,7 @@
 
 const Registration = require('../models/Registration');
 const Meetup = require('../models/Meetup');
+const User = require('../models/User');
 
 /**
  * @desc    Register the authenticated user for a meetup
@@ -49,6 +50,24 @@ const registerForMeetup = async (req, res, next) => {
       contribute: contribute || '',
       registeredAt: new Date()
     });
+
+    const user = await User.findById(userId);
+    console.log("USER FOUND:", user);
+
+if (user) {
+  user.points += 5;
+
+  if (user.points >= 50 && !user.badges.includes('Consistent Attendee')) {
+    user.badges.push('Consistent Attendee');
+  }
+
+  if (user.points >= 100 && !user.badges.includes('Super Networker')) {
+    user.badges.push('Super Networker');
+  }
+
+  await user.save();
+  console.log("UPDATED USER:", user);
+}
 
     res.status(201).json({
       success: true,

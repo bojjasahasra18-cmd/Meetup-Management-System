@@ -26,6 +26,12 @@ const Navbar = () => {
     <Link to="/history" className="nav-link">
   History
 </Link>
+<Link to="/leaderboard" className="nav-link">
+  Leaderboard
+</Link>
+<Link to="/community-insights">
+  Community Insights
+</Link>
 
     {(user?.role === 'organizer' || user?.role === 'admin') && (
       <Link to="/create-meetup" className="nav-link">Create Meetup</Link>

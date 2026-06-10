@@ -20,16 +20,21 @@ const generateToken = (id) => {
  */
 const register = async (req, res, next) => {
   try {
-    const {
-      name,
-      email,
-      password,
-      profession,
-      company,
-      lookingFor,
-      profilePicture,
-      role
-    } = req.body;
+   const {
+  name,
+  email,
+  password,
+  profession,
+  company,
+  lookingFor,
+  profilePicture,
+  linkedin,
+  portfolio,
+  bio,
+  role
+} = req.body;
+
+console.log("REQUEST BODY:", req.body);
 
     const userExists = await User.findOne({ email });
 
@@ -39,16 +44,19 @@ const register = async (req, res, next) => {
       });
     }
 
-    const user = await User.create({
-      name,
-      email,
-      password,
-      profession: profession || '',
-      company: company || '',
-      lookingFor: lookingFor || '',
-      profilePicture: profilePicture || '',
-      role: role || 'user'
-    });
+  const user = await User.create({
+  name,
+  email,
+  password,
+  profession: profession || '',
+  company: company || '',
+  lookingFor: lookingFor || '',
+  linkedin: linkedin || '',
+  portfolio: portfolio || '',
+  bio: bio || '',
+  profilePicture: profilePicture || '',
+  role: role || 'user'
+});
 
     res.status(201).json({
       success: true,
@@ -130,7 +138,16 @@ const getMe = async (req, res, next) => {
  */
 const updateMe = async (req, res, next) => {
   try {
-    const { name, profession, company, lookingFor, profilePicture } = req.body;
+    const {
+  name,
+  profession,
+  company,
+  lookingFor,
+  profilePicture,
+  linkedin,
+  portfolio,
+  bio,
+} = req.body;
 
     const user = await User.findById(req.user._id);
     if (!user) {
@@ -141,9 +158,17 @@ const updateMe = async (req, res, next) => {
     if (profession !== undefined) user.profession = profession;
     if (company !== undefined) user.company = company;
     if (lookingFor !== undefined) user.lookingFor = lookingFor;
-    if (profilePicture !== undefined) user.profilePicture = profilePicture;
+if (linkedin !== undefined) user.linkedin = linkedin;
+if (portfolio !== undefined) user.portfolio = portfolio;
+if (bio !== undefined) user.bio = bio;
+if (profilePicture !== undefined) user.profilePicture = profilePicture;
+if (linkedin !== undefined) user.linkedin = linkedin;
+if (portfolio !== undefined) user.portfolio = portfolio;
+if (bio !== undefined) user.bio = bio;
+
 
     const updatedUser = await user.save();
+    console.log("UPDATED USER:", updatedUser);
 
     res.status(200).json({
       success: true,
@@ -155,7 +180,11 @@ const updateMe = async (req, res, next) => {
         company: updatedUser.company,
         lookingFor: updatedUser.lookingFor,
         profilePicture: updatedUser.profilePicture,
-        role: updatedUser.role
+        linkedin: updatedUser.linkedin,
+portfolio: updatedUser.portfolio,
+bio: updatedUser.bio,
+        role: updatedUser.role,
+        
       }
     });
   } catch (error) {

@@ -44,16 +44,42 @@ const userSchema = new mongoose.Schema(
       default: '',
     },
 
+    linkedin: {
+  type: String,
+  default: '',
+},
+
+portfolio: {
+  type: String,
+  default: '',
+},
+
+bio: {
+  type: String,
+  default: '',
+},
+
     profilePicture: {
       type: String,
       default: '',
     },
 
-    role: {
-      type: String,
-      enum: ['user', 'organizer', 'admin'],
-      default: 'user',
-    },
+  role: {
+  type: String,
+  enum: ['user', 'organizer', 'admin'],
+  default: 'user',
+},
+
+points: {
+  type: Number,
+  default: 0,
+},
+
+badges: {
+  type: [String],
+  default: [],
+},
+
 
     isActive: {
       type: Boolean,

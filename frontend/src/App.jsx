@@ -12,6 +12,8 @@ import MeetupDetails from './pages/MeetupDetails';
 import CreateMeetup from './pages/CreateMeetup';
 import Analytics from './pages/Analytics';
 import History from './pages/History';
+import Leaderboard from "./pages/Leaderboard";
+import CommunityInsights from "./pages/CommunityInsights";
 
 import './App.css';
 
@@ -43,6 +45,13 @@ function App() {
               <Route path="/profile" element={<Profile />} />
               {/* History page */}
               <Route path="/history" element={<History />} />
+              {/* Leaderboard page */}
+              <Route path="/leaderboard" element={<Leaderboard />} />
+              {/* Community Insights page */}
+              <Route
+  path="/community-insights"
+  element={<CommunityInsights />}
+/>
 
               {/* Fallback route */}
               <Route path="*" element={<Navigate to="/" replace />} />
